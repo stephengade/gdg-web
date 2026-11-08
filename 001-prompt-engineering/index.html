@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cravely — Chef-Crafted Food Delivery</title>
+  <meta name="description" content="Cravely delivers chef-crafted artisan burgers, wood-fired sourdough pizzas, and healthy bowls hot to your door in 20 minutes." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230E4334'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/></svg>" />
+
+  <!-- Google Fonts: DM Serif Display (Editorial) & Plus Jakarta Sans (Clean UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==================== TOP ANNOUNCEMENT BAR ==================== -->
+  <aside class="announcement-bar" role="complementary" aria-label="Special promotion">
+    <div class="container announcement-content">
+      <span class="announcement-tag">SPECIAL DROP</span>
+      <p class="announcement-text">
+        Get <strong>20% OFF</strong> your first 3 chef orders with code <code id="promoCodeHeader">CRAVE20</code>
+      </p>
+      <button class="announcement-copy-btn" id="btnCopyPromo" title="Copy promo code" aria-label="Copy promo code CRAVE20">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span id="copyPromoText">Copy Code</span>
+      </button>
+      <div class="announcement-meta">
+        <span class="pulse-indicator"></span>
+        <span>Average Doorstep Drop: <strong>21 Mins</strong></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      
+      <!-- Left: Brand Logo in Editorial Serif -->
+      <a href="#hero" class="brand" aria-label="Cravely Home">
+        <span class="brand-name">Cravely<span class="brand-dot">.</span></span>
+      </a>
+
+      <!-- Center: Clean Desktop Navigation -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active">Discover</a></li>
+          <li><a href="#menu" class="nav-link">Menu Highlights</a></li>
+          <li><a href="about.html" class="nav-link">Our Story</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="#testimonials" class="nav-link">Stories</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right: Search Circle, Location & Cart -->
+      <div class="header-actions">
+        
+        <!-- Location Selector Pill -->
+        <div class="location-badge" id="locationSelector" role="button" tabindex="0" aria-label="Select delivery location">
+          <svg class="location-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span class="location-target" id="currentLocationText">Downtown, SF</span>
+          <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+
+        <!-- Circular Search Button -->
+        <button class="circle-btn" id="btnQuickSearch" aria-label="Search dishes and ingredients" onclick="document.getElementById('addressInput').focus()">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+        </button>
+
+        <!-- Cart Trigger Button -->
+        <button class="cart-btn" id="headerCartBtn" aria-label="View basket">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+            <path d="M3 6h18"></path>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-counter" id="cartCounter">0</span>
+        </button>
+
+        <!-- Primary Order CTA -->
+        <a href="#menu" class="btn btn-forest btn-sm header-cta">
+          <span>Order Now</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <nav class="mobile-nav" aria-label="Mobile Navigation">
+        <div class="mobile-location">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Delivering to <strong id="mobileLocText">Downtown, SF</strong></span>
+        </div>
+        <ul class="mobile-nav-links">
+          <li><a href="#hero" class="mobile-nav-link">✦ Discover</a></li>
+          <li><a href="#menu" class="mobile-nav-link">✦ Menu Highlights</a></li>
+          <li><a href="about.html" class="mobile-nav-link">✦ Our Story &amp; Mission</a></li>
+          <li><a href="#how-it-works" class="mobile-nav-link">✦ How It Works</a></li>
+          <li><a href="#testimonials" class="mobile-nav-link">✦ Customer Reviews</a></li>
+          <li><a href="#faq" class="mobile-nav-link">✦ FAQ</a></li>
+        </ul>
+        <div class="mobile-drawer-cta">
+          <a href="#menu" class="btn btn-forest btn-block">Explore Today's Menu</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="mainContent">
+
+    <!-- ==================== HERO SECTION (3-PANEL EDITORIAL SHOWCASE) ==================== -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        
+        <!-- Top Editorial Hero Header & Delivery Finder -->
+        <div class="hero-intro">
+          <div class="hero-intro-text">
+            <span class="hero-pill-badge">HANDCRAFTED CULINARY DELIVERY</span>
+            <h1 class="hero-main-title">
+              Fresh, artisanal dishes crafted by indie chefs & rushed warm to your table.
+            </h1>
+          </div>
+
+          <!-- Street Address Search Box -->
+          <form class="hero-search-bar" id="deliverySearchForm" onsubmit="event.preventDefault(); handleFindFood();">
+            <div class="search-input-inner">
+              <svg class="search-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <input 
+                type="text" 
+                id="addressInput" 
+                class="address-field" 
+                placeholder="Enter street address to check live kitchen ETA..." 
+                value="742 Market Street, San Francisco" 
+                required 
+                aria-label="Delivery address"
+              />
+              <button type="button" class="btn-locate" id="btnGeolocate" title="Use current GPS location" aria-label="Use current location">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+                </svg>
+              </button>
+            </div>
+            <button type="submit" class="btn btn-forest hero-search-btn">
+              <span>Find Kitchens</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- THE 3-PANEL SHOWCASE (Directly Inspired by Reference Design) -->
+        <div class="hero-panels-grid">
+          
+          <!-- PANEL 1: Forest Green Card with Doodle Art & Burger Cutout -->
+          <article class="hero-panel hero-panel-green">
+            <div class="panel-doodle-bg green-doodles"></div>
+            
+            <div class="panel-top-nav">
+              <span class="panel-tag">CHEF SPECIAL</span>
+              <span class="panel-price-badge">$16.50</span>
+            </div>
+
+            <!-- Floating Cutout Food Image -->
+            <div class="panel-dish-preview">
+              <img 
+                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80" 
+                alt="Double Truffle Wagyu Smash Burger" 
+                class="cutout-img float-subtle"
+              />
+            </div>
+
+            <div class="panel-content">
+              <h2 class="panel-serif-title">Artisan Wagyu Smash Burger.</h2>
+              <p class="panel-serif-sub">
+                45-day dry-aged beef, melted aged Havarti, grilled shallots on toasted brioche.
+              </p>
+              
+              <div class="panel-cta-group">
+                <a href="#menu" class="btn-pill-white" onclick="filterAndScroll('burgers')">
+                  <span>Order Burger</span>
+                </a>
+                <button class="circle-btn-action circle-btn-terracotta" aria-label="Quick order burger" onclick="quickAddHero(1, 'Double Truffle Wagyu Smash', 16.50)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 2: Lifestyle Chef / Kitchen Craft Photography Card -->
+          <article class="hero-panel hero-panel-photo">
+            <div class="photo-overlay"></div>
+            <img 
+              src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80" 
+              alt="Artisanal chef preparing fresh sourdough and ingredients in kitchen" 
+              class="panel-bg-photo"
+            />
+            
+            <div class="photo-card-top">
+              <div class="live-kitchen-badge">
+                <span class="live-dot"></span>
+                <span>Live Kitchen Stream</span>
+              </div>
+              <span class="eta-pill">⚡ 18-22 min delivery</span>
+            </div>
+
+            <div class="photo-card-bottom">
+              <span class="photo-chef-label">HEAD CHEF MARCO RINALDI</span>
+              <h3 class="photo-quote">“Every dish leaves our induction oven right as your courier arrives.”</h3>
+              <div class="photo-metrics">
+                <div class="metric-pill">★ 4.95 Rating</div>
+                <div class="metric-pill">🌱 100% Compostable Box</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 3: Golden Sunflower Yellow Card with Pizza Cutout & Doodles -->
+          <article class="hero-panel hero-panel-yellow">
+            <div class="panel-doodle-bg yellow-doodles"></div>
+
+            <div class="panel-top-nav">
+              <span class="panel-tag tag-dark">WOOD-FIRED 800°</span>
+              <span class="panel-price-badge price-dark">$18.00</span>
+            </div>
+
+            <!-- Floating Cutout Pizza Image -->
+            <div class="panel-dish-preview">
+              <img 
+                src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80" 
+                alt="Wood-Fired Neapolitan Margherita Pizza" 
+                class="cutout-img float-subtle-alt"
+              />
+            </div>
+
+            <div class="panel-content">
+              <h2 class="panel-serif-title text-dark">Cheese and Spice on every Slice.</h2>
+              <p class="panel-serif-sub text-dark-sub">
+                72-hour slow fermented sourdough, San Marzano reduction, buffalo mozzarella.
+              </p>
+              
+              <div class="panel-cta-group">
+                <a href="#menu" class="btn-pill-white" onclick="filterAndScroll('pizza')">
+                  <span>Order Pizza</span>
+                </a>
+                <button class="circle-btn-action circle-btn-dark" aria-label="Quick order pizza" onclick="quickAddHero(2, 'Artisan Margherita D.O.P.', 18.00)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Social Proof Under Hero -->
+        <div class="hero-footer-bar">
+          <div class="hero-stat-item">
+            <span class="stat-number">20 Min</span>
+            <span class="stat-desc">Guaranteed Doorstep Delivery</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="hero-stat-item">
+            <span class="stat-number">45,000+</span>
+            <span class="stat-desc">Orders Delivered This Month</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="hero-stat-item">
+            <span class="stat-number">4.9 / 5.0</span>
+            <span class="stat-desc">From 12,400+ Verified Diners</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="hero-stat-item">
+            <span class="stat-number">$0 Fees</span>
+            <span class="stat-desc">Zero Checkout Service Junk Markups</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== MENU HIGHLIGHTS (EDITORIAL RECIPE LEDGER) ==================== -->
+    <section class="menu-section" id="menu">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header text-center">
+          <span class="section-tag-subtle">CURATED DAILY HIGHLIGHTS</span>
+          <h2 class="section-editorial-title">Today’s Top Kitchen Selections</h2>
+          <p class="section-editorial-subtitle">
+            Cooked on-demand by premier neighborhood kitchens. Tap any dish to inspect the chef's backstory, macros &amp; allergens, or tap Add to Tray for instant dispatch.
+          </p>
+        </div>
+
+        <!-- Category Filters Pill Bar -->
+        <div class="menu-filter-bar" role="tablist" aria-label="Menu categories">
+          <button class="filter-tab active" data-category="all" role="tab" aria-selected="true">
+            <span>All Dishes</span>
+          </button>
+          <button class="filter-tab" data-category="burgers" role="tab" aria-selected="false">
+            <span>Artisan Burgers</span>
+          </button>
+          <button class="filter-tab" data-category="pizza" role="tab" aria-selected="false">
+            <span>Wood-Fired Pizza</span>
+          </button>
+          <button class="filter-tab" data-category="bowls" role="tab" aria-selected="false">
+            <span>Healthy Bowls</span>
+          </button>
+          <button class="filter-tab" data-category="asian" role="tab" aria-selected="false">
+            <span>Sushi & Asian</span>
+          </button>
+          <button class="filter-tab" data-category="desserts" role="tab" aria-selected="false">
+            <span>Desserts</span>
+          </button>
+        </div>
+
+        <!-- Menu Ledger Cards Grid (Inspired by Reference Lower Row) -->
+        <div class="menu-ledger-grid" id="menuGrid">
+
+          <!-- Item 1: Burger -->
+          <article class="ledger-card food-card" data-category="burgers" data-id="1">
+            <div class="ledger-card-header">
+              <h3 class="ledger-item-name">Double Truffle Wagyu Smash</h3>
+              <div class="ledger-line-leader"></div>
+              <span class="ledger-price">$16.50</span>
+            </div>
+
+            <div class="ledger-body">
+              <div class="ledger-thumbnail-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80" 
+                  alt="Double Truffle Wagyu Smash Burger" 
+                  class="ledger-dish-img"
+                  loading="lazy"
+                />
+                <button class="btn-wishlist" aria-label="Save to favorites">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </button>
+              </div>
+
+              <div class="ledger-text-wrap">
+                <h4 class="ledger-dish-headline">Two smashed wagyu beef patties with extra crunch & black truffle glaze.</h4>
+                <p class="ledger-ingredients">
+                  <strong>Pantry:</strong> 45-day dry aged beef, Havarti cheese, grilled scallions, pickled shallots, sea salt, brioche bun.
+                </p>
+                
+                <div class="ledger-card-footer">
+                  <button class="btn-add-ledger btn-add-cart" data-name="Double Truffle Wagyu Smash" data-price="16.50">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <span>Add to Tray</span>
+                  </button>
+                  <div class="ledger-meta-info">
+                    <span class="meta-rating">★ 4.9</span>
+                    <span class="meta-reviews">42 💬</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 2: Pizza -->
+          <article class="ledger-card food-card" data-category="pizza" data-id="2">
+            <div class="ledger-card-header">
+              <h3 class="ledger-item-name">Artisan Margherita D.O.P.</h3>
+              <div class="ledger-line-leader"></div>
+              <span class="ledger-price">$18.00</span>
+            </div>
+
+            <div class="ledger-body">
+              <div class="ledger-thumbnail-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=300&q=80" 
+                  alt="Wood-fired Margherita Pizza" 
+                  class="ledger-dish-img"
+                  loading="lazy"
+                />
+                <button class="btn-wishlist" aria-label="Save to favorites">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </button>
+              </div>
+
+              <div class="ledger-text-wrap">
+                <h4 class="ledger-dish-headline">72-hour slow fermented sourdough with blistered leopard crust.</h4>
+                <p class="ledger-ingredients">
+                  <strong>Pantry:</strong> San Marzano crushed tomato, fresh buffalo mozzarella, Genovese basil, cold-pressed olive oil, Maldon salt.
+                </p>
+                
+                <div class="ledger-card-footer">
+                  <button class="btn-add-ledger btn-add-cart" data-name="Artisan Margherita D.O.P." data-price="18.00">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <span>Add to Tray</span>
+                  </button>
+                  <div class="ledger-meta-info">
+                    <span class="meta-rating">★ 4.95</span>
+                    <span class="meta-reviews">61 💬</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 3: Bowls -->
+          <article class="ledger-card food-card" data-category="bowls" data-id="3">
+            <div class="ledger-card-header">
+              <h3 class="ledger-item-name">Rainbow Salmon Poke Bowl</h3>
+              <div class="ledger-line-leader"></div>
+              <span class="ledger-price">$17.25</span>
+            </div>
+
+            <div class="ledger-body">
+              <div class="ledger-thumbnail-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80" 
+                  alt="Rainbow Salmon Poke Bowl" 
+                  class="ledger-dish-img"
+                  loading="lazy"
+                />
+                <button class="btn-wishlist" aria-label="Save to favorites">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </button>
+              </div>
+
+              <div class="ledger-text-wrap">
+                <h4 class="ledger-dish-headline">Wild-caught Alaskan salmon with Hass avocado & ponzu glaze.</h4>
+                <p class="ledger-ingredients">
+                  <strong>Pantry:</strong> Raw King salmon, warm seasoned black forbidden rice, organic edamame, pickled radish, toasted sesame seeds.
+                </p>
+                
+                <div class="ledger-card-footer">
+                  <button class="btn-add-ledger btn-add-cart" data-name="Rainbow Salmon Poke Bowl" data-price="17.25">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <span>Add to Tray</span>
+                  </button>
+                  <div class="ledger-meta-info">
+                    <span class="meta-rating">★ 4.88</span>
+                    <span class="meta-reviews">38 💬</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 4: Asian / Sushi -->
+          <article class="ledger-card food-card" data-category="asian" data-id="4">
+            <div class="ledger-card-header">
+              <h3 class="ledger-item-name">Crispy Dragon Tempura Roll</h3>
+              <div class="ledger-line-leader"></div>
+              <span class="ledger-price">$19.50</span>
+            </div>
+
+            <div class="ledger-body">
+              <div class="ledger-thumbnail-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=300&q=80" 
+                  alt="Crispy Dragon Tempura Roll" 
+                  class="ledger-dish-img"
+                  loading="lazy"
+                />
+                <button class="btn-wishlist" aria-label="Save to favorites">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </button>
+              </div>
+
+              <div class="ledger-text-wrap">
+                <h4 class="ledger-dish-headline">Jumbo tiger prawn tempura wrapped in spicy bluefin tuna crown.</h4>
+                <p class="ledger-ingredients">
+                  <strong>Pantry:</strong> Tiger prawn tempura, bluefin tuna, sliced avocado, unagi kabayaki reduction, tobiko caviar, Japanese nori.
+                </p>
+                
+                <div class="ledger-card-footer">
+                  <button class="btn-add-ledger btn-add-cart" data-name="Crispy Dragon Tempura Roll" data-price="19.50">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <span>Add to Tray</span>
+                  </button>
+                  <div class="ledger-meta-info">
+                    <span class="meta-rating">★ 4.92</span>
+                    <span class="meta-reviews">53 💬</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 5: Crispy Fries & Wedges (Direct reference!) -->
+          <article class="ledger-card food-card" data-category="burgers" data-id="5">
+            <div class="ledger-card-header">
+              <h3 class="ledger-item-name">Basket of Crispy Wedges</h3>
+              <div class="ledger-line-leader"></div>
+              <span class="ledger-price">$8.50</span>
+            </div>
+
+            <div class="ledger-body">
+              <div class="ledger-thumbnail-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=300&q=80" 
+                  alt="Crispy potato wedges in brown cup" 
+                  class="ledger-dish-img"
+                  loading="lazy"
+                />
+                <button class="btn-wishlist" aria-label="Save to favorites">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </button>
+              </div>
+
+              <div class="ledger-text-wrap">
+                <h4 class="ledger-dish-headline">Rustic hand-cut potato wedges dusted in smoked paprika & rosemary.</h4>
+                <p class="ledger-ingredients">
+                  <strong>Pantry:</strong> Russet potatoes, Kerrygold butter, cold-pressed olive oil, ground smoked paprika, lemon zest, cracked black pepper.
+                </p>
+                
+                <div class="ledger-card-footer">
+                  <button class="btn-add-ledger btn-add-cart" data-name="Basket of Crispy Wedges" data-price="8.50">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <span>Add to Tray</span>
+                  </button>
+                  <div class="ledger-meta-info">
+                    <span class="meta-rating">★ 4.96</span>
+                    <span class="meta-reviews">36 💬</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 6: Desserts -->
+          <article class="ledger-card food-card" data-category="desserts" data-id="6">
+            <div class="ledger-card-header">
+              <h3 class="ledger-item-name">Valrhona Warm Lava Cake</h3>
+              <div class="ledger-line-leader"></div>
+              <span class="ledger-price">$10.50</span>
+            </div>
+
+            <div class="ledger-body">
+              <div class="ledger-thumbnail-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=300&q=80" 
+                  alt="Belgian Molten Chocolate Lava Cake" 
+                  class="ledger-dish-img"
+                  loading="lazy"
+                />
+                <button class="btn-wishlist" aria-label="Save to favorites">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </button>
+              </div>
+
+              <div class="ledger-text-wrap">
+                <h4 class="ledger-dish-headline">70% dark Belgian cocoa fondant with warm molten core & mascarpone.</h4>
+                <p class="ledger-ingredients">
+                  <strong>Pantry:</strong> Valrhona cocoa, fresh organic eggs, sweet cream butter, Madagascan vanilla pod, raw cane sugar.
+                </p>
+                
+                <div class="ledger-card-footer">
+                  <button class="btn-add-ledger btn-add-cart" data-name="Valrhona Warm Lava Cake" data-price="10.50">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <span>Add to Tray</span>
+                  </button>
+                  <div class="ledger-meta-info">
+                    <span class="meta-rating">★ 4.97</span>
+                    <span class="meta-reviews">49 💬</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="how-it-works-section" id="how-it-works">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag-subtle">TRANSPARENT PROCESS</span>
+          <h2 class="section-editorial-title">How Cravely Delivers in 20 Minutes</h2>
+          <p class="section-editorial-subtitle">
+            We discarded the old multi-stop aggregator model. Our kitchens and couriers are synced like an orchestra.
+          </p>
+        </div>
+
+        <div class="steps-editorial-grid">
+          
+          <div class="step-editorial-card">
+            <span class="step-badge-num">01</span>
+            <div class="step-card-content">
+              <h3 class="step-editorial-title">Independent Chef Prep</h3>
+              <p class="step-editorial-text">
+                Your order fires straight to the kitchen station. Sauces, doughs, and broths are simmered from scratch every morning.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-editorial-card">
+            <span class="step-badge-num">02</span>
+            <div class="step-card-content">
+              <h3 class="step-editorial-title">Direct Courier Routing</h3>
+              <p class="step-editorial-text">
+                Riders are stationed within 3 blocks of our kitchens. No multi-order batching or cold detours.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-editorial-card">
+            <span class="step-badge-num">03</span>
+            <div class="step-card-content">
+              <h3 class="step-editorial-title">Active Thermal Pods</h3>
+              <p class="step-editorial-text">
+                Delivered in heated induction carriers maintaining 145°F heat so buns stay soft and pizza cheese stays gooey.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== CUSTOMER TESTIMONIALS ==================== -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag-subtle">COMMUNITY STORIES</span>
+          <h2 class="section-editorial-title">Loved by San Francisco Foodies</h2>
+          <p class="section-editorial-subtitle">
+            Authentic experiences from diners who made Cravely their daily kitchen shortcut.
+          </p>
+        </div>
+
+        <div class="testimonials-editorial-grid">
+          
+          <article class="testimonial-editorial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">
+              “The Wagyu Smash arrived in 17 minutes flat. The brioche was warm, lettuce still crisp, and zero grease puddles. Far superior to any other delivery service in SoMa.”
+            </p>
+            <div class="testimonial-author-row">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80" alt="Elena Vance" class="author-avatar" />
+              <div>
+                <strong class="author-name">Elena Vance</strong>
+                <span class="author-neighborhood">Mission District • Ordered Truffle Wagyu</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-editorial-card featured-testimonial">
+            <div class="featured-badge-top">DISH OF THE WEEK</div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">
+              “The Margherita pizza crust had actual wood-smoke aroma and leopard char spots. What blew my mind was seeing $0 in bogus service fees on the final receipt.”
+            </p>
+            <div class="testimonial-author-row">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80" alt="Marcus Sterling" class="author-avatar" />
+              <div>
+                <strong class="author-name">Marcus Sterling</strong>
+                <span class="author-neighborhood">Pacific Heights • Ordered Margherita D.O.P.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-editorial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">
+              “Getting sashimi-grade poke that actually arrives chilled, firm, and glistening in 20 minutes used to be impossible. Cravely’s thermal packaging is witchcraft.”
+            </p>
+            <div class="testimonial-author-row">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80" alt="Chloe Lin" class="author-avatar" />
+              <div>
+                <strong class="author-name">Chloe Lin</strong>
+                <span class="author-neighborhood">Marina District • Ordered Salmon Poke</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Press Strip -->
+        <div class="press-bar">
+          <span class="press-title">AS PRAISED IN</span>
+          <div class="press-list">
+            <span>TechCrunch</span>
+            <span>Eater SF</span>
+            <span>Food & Wine</span>
+            <span>Bloomberg</span>
+            <span>Bon Appétit</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== CLEAR ORDER CTA SECTION ==================== -->
+    <section class="cta-section" id="order-cta">
+      <div class="container">
+        
+        <div class="cta-editorial-card">
+          <div class="cta-doodle-bg"></div>
+          
+          <div class="cta-inner-content">
+            <span class="cta-pill-badge">LIMITED WELCOME OFFER</span>
+            <h2 class="cta-title">
+              Ready to Feast on Chef-Grade Food at Home?
+            </h2>
+            <p class="cta-sub">
+              Claim <strong>20% OFF</strong> your first three orders. Enter your address to browse live neighborhood kitchens.
+            </p>
+
+            <form class="cta-form-row" onsubmit="event.preventDefault(); handleCtaOrder();">
+              <div class="cta-field-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <input 
+                  type="text" 
+                  id="ctaAddressInput" 
+                  placeholder="Enter your street address..." 
+                  value="742 Market Street, San Francisco" 
+                  required 
+                  aria-label="Delivery address for quick order"
+                />
+              </div>
+              <button type="submit" class="btn btn-terracotta cta-submit">
+                <span>Start Order</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </form>
+
+            <div class="cta-coupon-pill-wrap">
+              <span>Auto-applied at checkout:</span>
+              <div class="coupon-tag-box">
+                <strong class="coupon-val">CRAVE20</strong>
+                <button class="btn-copy-code" id="btnCopyPromoCta" title="Click to copy code">
+                  <span>Copy</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="cta-app-links">
+              <span>Also available for instantaneous ordering on iOS & Android:</span>
+              <div class="cta-app-badges">
+                <a href="#order-cta" class="app-store-pill">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.84c.66-.8 1.11-1.92.99-3.04-.96.04-2.12.64-2.8 1.44-.6.69-1.13 1.83-1 2.93 1.07.08 2.15-.53 2.81-1.33Z"/></svg>
+                  <span>App Store</span>
+                </a>
+                <a href="#order-cta" class="app-store-pill">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814 13.792 12 3.61 22.186a2.023 2.023 0 0 1-.61-1.464V3.278c0-.58.224-1.107.61-1.464zm11.24 11.24 2.585-2.586L4.764 3.243l10.085 9.811zm0 1.892-10.085 9.81 12.67-7.224-2.585-2.586zm4.076-2.586-2.946-1.68 1.91-1.91 1.036 1.036a1.2 1.2 0 0 1 0 1.708l-1.036 1.036-.002-.002.038.038z"/></svg>
+                  <span>Google Play</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== FAQ SECTION ==================== -->
+    <section class="faq-section" id="faq">
+      <div class="container faq-container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag-subtle">QUESTIONS & DETAILS</span>
+          <h2 class="section-editorial-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-accordion" id="faqAccordion">
+          
+          <div class="faq-item active">
+            <button class="faq-question" aria-expanded="true">
+              <span>How does Cravely guarantee a 20-minute delivery?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                We only show you kitchens located within a 1.8-mile radius. Dedicated couriers are dispatched the second a chef accepts the ticket, eliminating waiting queues.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What is your policy on surprise checkout fees?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                We have none. Delivery is a flat $2.50 or completely free for all orders over $25. No "regulatory response fees", "service charges", or weather markups.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What if my food arrives cold or late?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                If your food takes longer than 30 minutes, or arrives below optimum eating temperature, tap "Instant Refund" in your receipt for a 100% immediate wallet credit.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-grid">
+        
+        <div class="footer-col-brand">
+          <span class="footer-brand-title">Cravely<span class="brand-dot">.</span></span>
+          <p class="footer-desc">
+            An artisanal culinary delivery network connecting indie neighborhood kitchens to passionate food lovers.
+          </p>
+          <div class="social-pills">
+            <a href="#hero" class="social-pill" aria-label="Instagram">Instagram</a>
+            <a href="#hero" class="social-pill" aria-label="Twitter">Twitter/X</a>
+            <a href="#hero" class="social-pill" aria-label="TikTok">TikTok</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-head">Pantry & Menus</h4>
+          <ul class="footer-links">
+            <li><a href="#menu">Artisan Wagyu</a></li>
+            <li><a href="#menu">Wood-Fired Pizza</a></li>
+            <li><a href="#menu">Salmon Bowls</a></li>
+            <li><a href="#menu">Belgian Sweets</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-head">Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">Our Story &amp; Mission</a></li>
+            <li><a href="#how-it-works">Our Secret</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="about.html#chefs">Chef Partnerships</a></li>
+            <li><a href="about.html#mission">Courier Network</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-head">Kitchen Drops</h4>
+          <p class="newsletter-sub">Receive Friday secret chef tasting invitations & 20% off drops.</p>
+          <form class="footer-form" onsubmit="event.preventDefault(); handleNewsletter();">
+            <input type="email" id="newsletterEmail" placeholder="Enter email..." required aria-label="Email address" />
+            <button type="submit" class="btn btn-terracotta btn-sm">Join</button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>&copy; 2026 Cravely Technologies. Crafted for exceptional taste.</span>
+        <div class="footer-legal-links">
+          <a href="#faq">Privacy</a>
+          <span>•</span>
+          <a href="#faq">Terms</a>
+          <span>•</span>
+          <a href="#faq">Nutritional Transparency</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== FLOATING CART PILL (STICKY) ==================== -->
+  <aside class="floating-order-bar" id="floatingOrderBar" aria-label="Current order summary" role="button" tabindex="0">
+    <div class="floating-bar-inner">
+      <div class="floating-bar-left">
+        <div class="floating-cart-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="floating-badge-num" id="floatingCartCount">0</span>
+        </div>
+        <div class="floating-bar-text">
+          <span class="floating-order-title" id="floatingOrderTitle">Your Tray</span>
+          <span class="floating-order-sub" id="floatingOrderSub">Add dishes to proceed</span>
+        </div>
+      </div>
+      <div class="floating-bar-right">
+        <span class="floating-total-price" id="floatingTotalPrice">$0.00</span>
+        <button type="button" class="btn btn-forest btn-sm" id="btnFloatingCheckout">
+          <span>Checkout</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== CART & CHECKOUT SLIDE-OVER DRAWER ==================== -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle" aria-hidden="true">
+    
+    <!-- Drawer Header -->
+    <div class="cart-drawer-header">
+      <div class="drawer-header-left">
+        <h2 class="cart-drawer-title" id="cartDrawerTitle">Your Culinary Tray</h2>
+        <span class="cart-drawer-count" id="drawerCartCountBadge">0 items</span>
+      </div>
+      <button class="drawer-close-btn" id="btnCartDrawerClose" aria-label="Close cart drawer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Free Delivery Progress Bar -->
+    <div class="cart-free-delivery-banner" id="cartDeliveryBanner">
+      <div class="delivery-banner-text" id="deliveryBannerText">
+        <span>Add <strong>$25.00</strong> more for <strong>FREE 20-Min Delivery</strong></span>
+      </div>
+      <div class="delivery-progress-track">
+        <div class="delivery-progress-fill" id="deliveryProgressFill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- STEP 1: CART ITEMS VIEW -->
+    <div class="drawer-view active" id="cartStepItems">
+      <div class="cart-scroll-area">
+        
+        <!-- Empty Cart State -->
+        <div class="cart-empty-state" id="cartEmptyState">
+          <div class="empty-icon-wrap">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <h3 class="empty-title">Your tray is empty</h3>
+          <p class="empty-desc">Explore today's chef specials and add freshly prepared dishes to your tray.</p>
+          <button type="button" class="btn btn-forest btn-sm" id="btnEmptyBrowse">
+            Browse Menu Ledger
+          </button>
+        </div>
+
+        <!-- Populated Cart Items List -->
+        <div class="cart-items-list" id="cartItemsList">
+          <!-- Dynamically populated by JS -->
+        </div>
+
+        <!-- Promo Code Section -->
+        <div class="cart-promo-section" id="cartPromoSection">
+          <div class="cart-promo-row">
+            <input type="text" id="cartPromoInput" placeholder="Promo code (e.g. CRAVE20)" aria-label="Promo code" />
+            <button type="button" class="btn btn-dark-subtle btn-sm" id="btnApplyCartPromo">Apply</button>
+          </div>
+          <div class="promo-quick-apply" id="promoQuickApplyWrap">
+            <button type="button" class="promo-chip" id="btnQuickApplyCRAVE20">
+              <span class="chip-sparkle">✦</span>
+              <span>Tap to apply <strong>CRAVE20</strong> (20% OFF)</span>
+            </button>
+          </div>
+          <div class="promo-applied-badge hidden" id="promoAppliedBadge">
+            <span class="promo-tag">✓ <strong>CRAVE20</strong> applied &bull; 20% OFF food</span>
+            <button type="button" class="promo-remove-btn" id="btnRemovePromo" title="Remove promo">&times;</button>
+          </div>
+        </div>
+
+        <!-- Courier Tip Selector -->
+        <div class="cart-tip-section" id="cartTipSection">
+          <span class="tip-label">Courier & Kitchen Tip:</span>
+          <div class="tip-options" id="tipOptionsGroup">
+            <button type="button" class="tip-btn" data-tip="2.00">$2.00</button>
+            <button type="button" class="tip-btn active" data-tip="3.00">$3.00</button>
+            <button type="button" class="tip-btn" data-tip="5.00">$5.00</button>
+            <button type="button" class="tip-btn" data-tip="0.00">None</button>
+          </div>
+        </div>
+
+        <!-- Ledger Financial Breakdown -->
+        <div class="cart-summary-table" id="cartSummaryTable">
+          <div class="summary-line">
+            <span>Items Subtotal</span>
+            <span id="summarySubtotal">$0.00</span>
+          </div>
+          <div class="summary-line discount-line hidden" id="summaryDiscountRow">
+            <span>Promo Discount (20%)</span>
+            <span id="summaryDiscount">-$0.00</span>
+          </div>
+          <div class="summary-line">
+            <span>20-Min Express Delivery</span>
+            <span id="summaryDelivery">$2.50</span>
+          </div>
+          <div class="summary-line">
+            <span>Courier Thermal Tip</span>
+            <span id="summaryTip">$3.00</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-line total-line">
+            <span>Total Estimated</span>
+            <span class="summary-total-price" id="summaryTotal">$0.00</span>
+          </div>
+        </div>
+
+        <!-- Guarantee Note -->
+        <div class="cart-guarantee-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Guaranteed 20-min drop &bull; Active thermal pods &bull; Zero surprise fees</span>
+        </div>
+
+      </div>
+
+      <!-- Drawer Footer CTA -->
+      <div class="cart-drawer-footer" id="cartDrawerFooter">
+        <button type="button" class="btn btn-forest btn-block btn-lg" id="btnProceedToCheckout">
+          <span>Proceed to Checkout</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: CHECKOUT & ADDRESS VIEW -->
+    <div class="drawer-view hidden" id="cartStepCheckout">
+      <div class="cart-scroll-area">
+        <button type="button" class="btn-back-link" id="btnBackToCart">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          <span>Back to Order Tray</span>
+        </button>
+
+        <h3 class="checkout-section-title">Delivery Coordinates</h3>
+        
+        <div class="checkout-form-group">
+          <label for="checkoutAddress">Street Address / Drop Point</label>
+          <div class="checkout-input-with-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <input type="text" id="checkoutAddress" value="450 Mission St, San Francisco, CA" required />
+          </div>
+        </div>
+
+        <div class="checkout-form-row">
+          <div class="checkout-form-group">
+            <label for="checkoutSuite">Apt, Suite, Buzzer</label>
+            <input type="text" id="checkoutSuite" placeholder="Apt 4B / Callbox #12" />
+          </div>
+          <div class="checkout-form-group">
+            <label for="checkoutPhone">Mobile Phone</label>
+            <input type="tel" id="checkoutPhone" value="(415) 890-2411" required />
+          </div>
+        </div>
+
+        <div class="checkout-form-group">
+          <label for="checkoutNotes">Special Drop Instructions</label>
+          <input type="text" id="checkoutNotes" placeholder="e.g. Leave on doorstep table, do not knock." />
+        </div>
+
+        <!-- Thermal Pod Route Assurance -->
+        <div class="thermal-route-box">
+          <div class="thermal-badge">
+            <span class="thermal-pulse"></span>
+            <span>HEATED POD #14 RESERVED</span>
+          </div>
+          <p class="thermal-desc">
+            Your dishes are sealed at 155°F in insulated active induction pods. 20-minute countdown starts the moment chef stamps receipt.
+          </p>
+        </div>
+
+        <h3 class="checkout-section-title">Payment Method</h3>
+
+        <div class="payment-tabs">
+          <label class="payment-tab active">
+            <input type="radio" name="paymentMethod" value="card" checked />
+            <span class="payment-tab-content">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              <span>Credit Card</span>
+            </span>
+          </label>
+          <label class="payment-tab">
+            <input type="radio" name="paymentMethod" value="applepay" />
+            <span class="payment-tab-content">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.06 1.71-.93 2.73 1 .08 2.01-.54 2.55-1.23"/></svg>
+              <span>Apple Pay</span>
+            </span>
+          </label>
+        </div>
+
+        <div class="mock-card-fields" id="cardFieldsWrap">
+          <div class="checkout-form-group">
+            <label for="cardNumberInput">Card Number</label>
+            <div class="mock-card-input">
+              <input type="text" id="cardNumberInput" placeholder="4242 •••• •••• 4242" maxlength="19" value="4242 8890 2314 9012" />
+              <svg width="24" height="16" viewBox="0 0 36 24" fill="none"><rect width="36" height="24" rx="4" fill="#0E4334"/><circle cx="14" cy="12" r="7" fill="#EB001B" fill-opacity="0.85"/><circle cx="22" cy="12" r="7" fill="#F79E1B" fill-opacity="0.85"/></svg>
+            </div>
+          </div>
+          <div class="checkout-form-row">
+            <div class="checkout-form-group">
+              <label for="cardExpiryInput">Expiry</label>
+              <input type="text" id="cardExpiryInput" placeholder="MM/YY" maxlength="5" value="08/28" />
+            </div>
+            <div class="checkout-form-group">
+              <label for="cardCvcInput">CVC / CVI</label>
+              <input type="text" id="cardCvcInput" placeholder="123" maxlength="4" value="892" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkout Total Quick Line -->
+        <div class="checkout-bill-line">
+          <span>Amount to Pay:</span>
+          <strong id="checkoutFinalAmount">$0.00</strong>
+        </div>
+
+      </div>
+
+      <div class="cart-drawer-footer">
+        <button type="button" class="btn btn-terracotta btn-block btn-lg" id="btnPlaceOrder">
+          <span id="placeOrderText">Place 20-Min Order &amp; Track</span>
+          <div class="spinner-inline hidden" id="orderSpinner"></div>
+        </button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ==================== DISH DETAIL EDITORIAL MODAL ==================== -->
+  <div class="dish-modal-overlay" id="dishModalOverlay" aria-hidden="true"></div>
+  <div class="dish-detail-modal" id="dishDetailModal" role="dialog" aria-modal="true" aria-labelledby="modalDishTitle" aria-hidden="true">
+    <button type="button" class="modal-close-btn" id="btnDishModalClose" aria-label="Close dish preview">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="dish-modal-grid">
+      
+      <!-- Left: Visual Column -->
+      <div class="dish-modal-media">
+        <img src="" alt="" id="modalDishImg" class="dish-modal-img" />
+        <div class="dish-modal-badges">
+          <span class="modal-pill-tag" id="modalDishCategory">Category</span>
+          <span class="modal-pill-rating" id="modalDishRating">★ 4.9</span>
+        </div>
+        <div class="modal-kitchen-card">
+          <div class="kitchen-avatar">🍳</div>
+          <div class="kitchen-details">
+            <span class="kitchen-label">Crafted by Indie Kitchen</span>
+            <strong class="kitchen-name" id="modalDishKitchen">SmashCraft Lab</strong>
+            <span class="kitchen-chef" id="modalDishChef">Chef Marcus Vance</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Editorial Content Column -->
+      <div class="dish-modal-info">
+        <div class="dish-modal-header">
+          <h2 class="dish-modal-title" id="modalDishTitle">Dish Name</h2>
+          <span class="dish-modal-price" id="modalDishPrice">$0.00</span>
+        </div>
+
+        <p class="dish-modal-headline" id="modalDishHeadline">Dish summary headline.</p>
+        <p class="dish-modal-story" id="modalDishStory">Detailed culinary backstory...</p>
+
+        <!-- Dietary & Allergen Badges -->
+        <div class="dietary-tags-group" id="modalDietaryTags">
+          <!-- Filled by JS -->
+        </div>
+
+        <!-- Macro Nutritional Breakdown -->
+        <div class="macro-stats-row">
+          <div class="macro-item">
+            <span class="macro-val" id="macroCal">820</span>
+            <span class="macro-key">Calories</span>
+          </div>
+          <div class="macro-item">
+            <span class="macro-val" id="macroProtein">48g</span>
+            <span class="macro-key">Protein</span>
+          </div>
+          <div class="macro-item">
+            <span class="macro-val" id="macroCarbs">38g</span>
+            <span class="macro-key">Carbs</span>
+          </div>
+          <div class="macro-item">
+            <span class="macro-val" id="macroFat">52g</span>
+            <span class="macro-key">Fats</span>
+          </div>
+        </div>
+
+        <!-- Pantry Ingredients List -->
+        <div class="modal-pantry-box">
+          <span class="pantry-heading">PANTRY INGREDIENTS</span>
+          <p id="modalDishPantry" class="pantry-body">Pantry items...</p>
+        </div>
+
+        <!-- Customization -->
+        <div class="modal-customization-box">
+          <label class="customization-label" for="modalSpecialNotes">Special Kitchen Request</label>
+          <input type="text" id="modalSpecialNotes" placeholder="e.g. Extra sauce on side, light salt..." />
+        </div>
+
+        <!-- Modal Bottom Stepper & CTA -->
+        <div class="modal-action-row">
+          <div class="quantity-stepper">
+            <button type="button" class="step-btn" id="modalQtyMinus" aria-label="Decrease quantity">&minus;</button>
+            <span class="step-count" id="modalQtyCount">1</span>
+            <button type="button" class="step-btn" id="modalQtyPlus" aria-label="Increase quantity">&plus;</button>
+          </div>
+          <button type="button" class="btn btn-forest btn-block" id="btnModalAddToCart">
+            <span id="modalAddBtnText">Add to Tray &bull; $16.50</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== LIVE ORDER TRACKER MODAL ==================== -->
+  <div class="tracker-modal-overlay" id="trackerModalOverlay" aria-hidden="true"></div>
+  <div class="order-tracker-modal" id="orderTrackerModal" role="dialog" aria-modal="true" aria-labelledby="trackerTitle" aria-hidden="true">
+    
+    <!-- Tracker Header -->
+    <div class="tracker-header">
+      <div class="tracker-status-badge">
+        <span class="live-dot-pulse"></span>
+        <span id="trackerTitle">LIVE ORDER IN MOTION</span>
+      </div>
+      <div class="tracker-id-wrap">
+        <span class="tracker-order-id" id="trackerOrderId">#CRV-8942</span>
+        <span class="tracker-guarantee-pill">20-Min Promise</span>
+      </div>
+      <div class="tracker-ctrl-btns">
+        <button type="button" class="tracker-icon-btn" id="btnMinimizeTracker" title="Minimize tracking to background">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="m14 10 7-7"/><path d="m3 21 7-7"/></svg>
+        </button>
+        <button type="button" class="tracker-icon-btn" id="btnCloseTracker" title="Close tracker">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Countdown & Status Banner -->
+    <div class="tracker-eta-banner">
+      <div class="eta-left">
+        <span class="eta-label">ESTIMATED DOORSTEP DROP IN</span>
+        <div class="eta-countdown-display" id="trackerEtaTimer">19:48</div>
+      </div>
+      <div class="eta-right">
+        <div class="thermal-status-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+          <span>Pod Temp: <strong>154&deg;F Locked</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE MAP SIMULATION (Vector SVG Graphic with animated route & courier icon) -->
+    <div class="live-map-container" id="liveMapContainer">
+      <svg class="sf-vector-map" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bayWaterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E2EDEA"/>
+            <stop offset="100%" stop-color="#D3E4E0"/>
+          </linearGradient>
+          <linearGradient id="routeGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#D9532F"/>
+            <stop offset="50%" stop-color="#F5BE38"/>
+            <stop offset="100%" stop-color="#0E4334"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Base Map Landscape -->
+        <rect width="800" height="450" fill="#F4EFE6" />
+        
+        <!-- SF Bay Water Silhouette -->
+        <path d="M 520,0 Q 560,110 630,170 T 800,240 L 800,0 Z" fill="url(#bayWaterGrad)" />
+        <path d="M 680,450 C 640,380 670,300 800,250 L 800,450 Z" fill="url(#bayWaterGrad)" opacity="0.6"/>
+
+        <!-- City Blocks & Parks -->
+        <rect x="70" y="50" width="120" height="90" rx="14" fill="#E8E2D4" opacity="0.8"/>
+        <rect x="220" y="40" width="160" height="100" rx="14" fill="#E8E2D4" opacity="0.8"/>
+        <rect x="410" y="30" width="100" height="110" rx="14" fill="#DEE6DC" opacity="0.9"/>
+        <text x="430" y="85" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600" fill="#6A8071">GARDENS</text>
+
+        <rect x="60" y="170" width="140" height="110" rx="14" fill="#E8E2D4" opacity="0.8"/>
+        <rect x="230" y="170" width="140" height="100" rx="14" fill="#E8E2D4" opacity="0.8"/>
+        <rect x="400" y="170" width="150" height="100" rx="14" fill="#E8E2D4" opacity="0.8"/>
+        <rect x="580" y="180" width="90" height="80" rx="14" fill="#E8E2D4" opacity="0.7"/>
+
+        <rect x="70" y="310" width="130" height="100" rx="14" fill="#E8E2D4" opacity="0.8"/>
+        <rect x="230" y="300" width="150" height="110" rx="14" fill="#E8E2D4" opacity="0.8"/>
+        <rect x="410" y="300" width="160" height="110" rx="14" fill="#E8E2D4" opacity="0.8"/>
+
+        <!-- Street Network Grids -->
+        <!-- Market St Diagonal Thoroughfare -->
+        <line x1="30" y1="420" x2="650" y2="80" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round"/>
+        <line x1="30" y1="420" x2="650" y2="80" stroke="#DFD7C7" stroke-width="2"/>
+        <text x="310" y="240" transform="rotate(-28 310 240)" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="#88938B" letter-spacing="2">MARKET STREET</text>
+
+        <!-- Mission Street Parallel -->
+        <line x1="20" y1="460" x2="680" y2="120" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round"/>
+        <line x1="20" y1="460" x2="680" y2="120" stroke="#DFD7C7" stroke-width="1.5"/>
+        <text x="340" y="295" transform="rotate(-28 340 295)" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#9BA59E" letter-spacing="1">MISSION ST</text>
+
+        <!-- Cross Streets (4th, 3rd, 2nd, Montgomery) -->
+        <line x1="200" y1="20" x2="200" y2="430" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+        <line x1="380" y1="20" x2="380" y2="430" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+        <line x1="560" y1="20" x2="560" y2="430" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+        <text x="385" y="50" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#9BA59E">4TH ST</text>
+        <text x="565" y="50" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#9BA59E">2ND ST</text>
+
+        <!-- Animated Route Line -->
+        <path id="courierRoutePath" d="M 170,350 L 170,300 L 290,230 L 380,185 L 510,115 L 530,125" fill="none" stroke="url(#routeGlow)" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 6" class="route-dash-animation"/>
+
+        <!-- Origin Pin: Kitchen -->
+        <g transform="translate(170, 350)">
+          <circle r="22" fill="#0E4334" opacity="0.15" class="map-pulse-anim"/>
+          <circle r="14" fill="#0E4334"/>
+          <text x="0" y="5" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">🍳</text>
+          <rect x="-60" y="22" width="120" height="22" rx="11" fill="#0E4334"/>
+          <text x="0" y="37" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle">KITCHEN DISPATCH</text>
+        </g>
+
+        <!-- Destination Pin: User Table -->
+        <g transform="translate(530, 125)">
+          <circle r="24" fill="#D9532F" opacity="0.2" class="map-pulse-anim-dest"/>
+          <circle r="15" fill="#D9532F"/>
+          <circle r="5" fill="#FFFFFF"/>
+          <rect x="-55" y="-34" width="110" height="22" rx="11" fill="#D9532F"/>
+          <text x="0" y="-19" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle">YOUR DOORSTEP</text>
+        </g>
+
+        <!-- Animated Moving Courier Marker -->
+        <g id="animatedCourierMarker" transform="translate(320, 215)">
+          <circle r="16" fill="#F5BE38" opacity="0.3" class="map-pulse-anim"/>
+          <circle r="13" fill="#F5BE38" stroke="#19211C" stroke-width="2"/>
+          <text x="0" y="4" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" text-anchor="middle">🛵</text>
+        </g>
+
+      </svg>
+      
+      <!-- Live Map Floating Overlay Pill -->
+      <div class="map-floating-pill">
+        <span class="live-badge-glow"></span>
+        <span id="mapLiveStatusText">Courier Marco is 1.1 miles away &bull; Moving northeast</span>
+      </div>
+    </div>
+
+    <!-- 4-Step Culinary Progress Timeline -->
+    <div class="tracker-timeline-wrap">
+      <div class="tracker-step completed" id="step1">
+        <div class="step-marker">&#10003;</div>
+        <div class="step-info">
+          <strong class="step-title">Order Received</strong>
+          <span class="step-sub">Ticket printed at Indie Kitchen</span>
+        </div>
+      </div>
+      <div class="tracker-step active" id="step2">
+        <div class="step-marker"><span class="step-spinner"></span></div>
+        <div class="step-info">
+          <strong class="step-title">Chef Crafting</strong>
+          <span class="step-sub">Prepped on-demand &amp; seared hot</span>
+        </div>
+      </div>
+      <div class="tracker-step" id="step3">
+        <div class="step-marker">3</div>
+        <div class="step-info">
+          <strong class="step-title">Pod Induction Sealed</strong>
+          <span class="step-sub">155&deg;F thermal cargo pod lock</span>
+        </div>
+      </div>
+      <div class="tracker-step" id="step4">
+        <div class="step-marker">4</div>
+        <div class="step-info">
+          <strong class="step-title">Doorstep Drop</strong>
+          <span class="step-sub">Ring buzzer &amp; handoff</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Courier Profile & Contact Bar -->
+    <div class="courier-profile-card">
+      <div class="courier-left">
+        <div class="courier-avatar">
+          <span>MR</span>
+        </div>
+        <div class="courier-meta">
+          <span class="courier-name">Marco Rossi</span>
+          <span class="courier-sub">&starf; 4.98 &bull; 1,480 safe drops &bull; Specialized E-Cargo</span>
+        </div>
+      </div>
+      <div class="courier-actions">
+        <button type="button" class="btn btn-outline-dark btn-sm" id="btnCallCourier">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>Call</span>
+        </button>
+        <button type="button" class="btn btn-forest btn-sm" id="btnMsgCourier">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Message</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Order Receipt -->
+    <details class="tracker-receipt-accordion">
+      <summary class="receipt-summary">
+        <span>View Order Receipt &amp; Items</span>
+        <span id="trackerReceiptTotal">$0.00</span>
+      </summary>
+      <div class="receipt-details-body" id="trackerReceiptItems">
+        <!-- populated by JS -->
+      </div>
+    </details>
+
+  </div>
+
+  <!-- ==================== MINIMIZED LIVE TRACKING FLOATING PILL ==================== -->
+  <aside class="minimized-tracking-bar hidden" id="minimizedTrackingBar" role="region" aria-label="Active order tracking">
+    <div class="minimized-inner">
+      <div class="minimized-icon">
+        <span class="live-dot-pulse"></span>
+        <span>🛵</span>
+      </div>
+      <div class="minimized-text">
+        <span class="minimized-title" id="minimizedOrderTitle">Order #CRV-8942 en route</span>
+        <span class="minimized-sub" id="minimizedOrderEta">Arriving in ~19 mins</span>
+      </div>
+      <button type="button" class="btn btn-forest btn-sm" id="btnMaximizeTracker">
+        <span>View Map</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== INTERACTIVE TOAST ==================== -->
+  <div class="toast-notification" id="toastNotification" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="toast-content">
+      <span class="toast-title" id="toastTitle">Added to order</span>
+      <span class="toast-message" id="toastMessage">Dish added to your delivery tray.</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>

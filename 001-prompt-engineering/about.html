@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story &amp; Manifesto — Cravely Food Delivery</title>
+  <meta name="description" content="Why we built Cravely: 20-minute direct delivery, heated induction thermal pods, 85%+ chef revenue share, and zero hidden junk fees." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230E4334'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/></svg>" />
+
+  <!-- Google Fonts: DM Serif Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==================== TOP ANNOUNCEMENT BAR ==================== -->
+  <aside class="announcement-bar" role="complementary" aria-label="Special promotion">
+    <div class="container announcement-content">
+      <span class="announcement-tag">SPECIAL DROP</span>
+      <p class="announcement-text">
+        Get <strong>20% OFF</strong> your first 3 chef orders with code <code id="promoCodeHeader">CRAVE20</code>
+      </p>
+      <button class="announcement-copy-btn" id="btnCopyPromo" title="Copy promo code" aria-label="Copy promo code CRAVE20">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span id="copyPromoText">Copy Code</span>
+      </button>
+      <div class="announcement-meta">
+        <span class="pulse-indicator"></span>
+        <span>Average Doorstep Drop: <strong>21 Mins</strong></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      
+      <!-- Left: Brand Logo -->
+      <a href="index.html#hero" class="brand" aria-label="Cravely Home">
+        <span class="brand-name">Cravely<span class="brand-dot">.</span></span>
+      </a>
+
+      <!-- Center: Clean Desktop Navigation -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html#hero" class="nav-link">Discover</a></li>
+          <li><a href="index.html#menu" class="nav-link">Menu Highlights</a></li>
+          <li><a href="about.html" class="nav-link active">Our Story</a></li>
+          <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="index.html#testimonials" class="nav-link">Stories</a></li>
+          <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right: Search Circle, Location & Cart -->
+      <div class="header-actions">
+        
+        <!-- Location Selector Pill -->
+        <div class="location-badge" id="locationSelector" role="button" tabindex="0" aria-label="Select delivery location">
+          <svg class="location-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span class="location-target" id="currentLocationText">Downtown, SF</span>
+          <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+
+        <!-- Cart Trigger Button -->
+        <button class="cart-btn" id="headerCartBtn" aria-label="View basket">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+            <path d="M3 6h18"></path>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-counter" id="cartCounter">0</span>
+        </button>
+
+        <!-- Primary Order CTA -->
+        <a href="index.html#menu" class="btn btn-forest btn-sm header-cta">
+          <span>Explore Menu</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <nav class="mobile-nav" aria-label="Mobile Navigation">
+        <div class="mobile-location">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Delivering to <strong id="mobileLocText">Downtown, SF</strong></span>
+        </div>
+        <ul class="mobile-nav-links">
+          <li><a href="index.html#hero" class="mobile-nav-link">✦ Discover</a></li>
+          <li><a href="index.html#menu" class="mobile-nav-link">✦ Menu Highlights</a></li>
+          <li><a href="about.html" class="mobile-nav-link active">✦ Our Story &amp; Mission</a></li>
+          <li><a href="index.html#how-it-works" class="mobile-nav-link">✦ How It Works</a></li>
+          <li><a href="index.html#testimonials" class="mobile-nav-link">✦ Customer Reviews</a></li>
+          <li><a href="index.html#faq" class="mobile-nav-link">✦ FAQ</a></li>
+        </ul>
+        <div class="mobile-drawer-cta">
+          <a href="index.html#menu" class="btn btn-forest btn-block">Explore Today's Menu</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="mainContent">
+
+    <!-- ==================== HERO MANIFESTO ==================== -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="about-hero-inner">
+          <span class="hero-pill-badge">THE CRAVELY MANIFESTO</span>
+          <h1 class="about-hero-title">
+            Restoring dignity to neighborhood food delivery.
+          </h1>
+          <p class="about-hero-subtitle">
+            Corporate delivery apps broke the bond between independent culinary artists and food lovers with 40% fees, stacked multi-order trips, and soggy cardboard boxes. We built Cravely to prove that hot, chef-crafted takeout is an artisanal discipline.
+          </p>
+
+          <!-- Impact Metrics Bar -->
+          <div class="about-metrics-bar">
+            <div class="about-metric-item">
+              <span class="about-metric-number">85%+</span>
+              <span class="about-metric-label">Revenue Retained by Chefs (vs 62% Industry)</span>
+            </div>
+            <div class="about-metric-item">
+              <span class="about-metric-number">19.4 Min</span>
+              <span class="about-metric-label">Average Doorstep Delivery Time</span>
+            </div>
+            <div class="about-metric-item">
+              <span class="about-metric-number">155°F</span>
+              <span class="about-metric-label">Active Induction Pod Temperature Lock</span>
+            </div>
+            <div class="about-metric-item">
+              <span class="about-metric-number">42</span>
+              <span class="about-metric-label">Artisan Kitchen Partners Across SF</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ORIGIN STORY ==================== -->
+    <section class="about-story-section" id="origin">
+      <div class="container">
+        <div class="about-story-grid">
+          
+          <div class="story-narrative">
+            <span class="section-tag-subtle">THE ORIGIN STORY</span>
+            <h2>Born on 24th Street in San Francisco's Mission District.</h2>
+            <p class="story-lead">
+              In the winter of 2024, Mateo Cruz—a former fine-dining sous chef—watched a 45-day dry-aged wagyu smash burger sit on a stainless steel pass for 37 minutes.
+            </p>
+            <p class="story-body">
+              The third-party app courier was stuck three neighborhoods away picking up orders from two chain convenience stores and a bubble tea shop. When the driver finally arrived, he shoved Mateo's creation into a lukewarm nylon backpack already bulging with cold sodas.
+            </p>
+            <p class="story-body">
+              That night, Mateo met with Liam Chen, an urban logistics software architect. On the back of a stained butcher paper receipt, they sketched the Cravely thesis: <em>"1 Kitchen. 1 Dedicated Courier. 1 Active Heated Induction Pod. Under 2.2 Miles. 20 Minutes Flat."</em>
+            </p>
+
+            <div class="story-quote-card">
+              <blockquote>
+                "If an artist spent three days cultivating sourdough or forty-five days aging beef, an algorithm has no right to deliver it forty minutes late and cold."
+              </blockquote>
+              <span class="story-quote-author">— Mateo Cruz &amp; Liam Chen, Co-Founders of Cravely</span>
+            </div>
+          </div>
+
+          <div class="story-visual-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" 
+              alt="Chef inspecting wood-fired artisanal pizza dough" 
+              class="story-main-img" 
+            />
+            <div class="story-floating-badge">
+              <span class="badge-tag">GUARANTEED STEAM LOCK</span>
+              <p class="badge-text">Food arrives at the exact eating temperature intended by the chef.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== OUR FOUR PILLARS ==================== -->
+    <section class="about-pillars-section" id="pillars">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag-subtle">CULINARY INTEGRITY</span>
+          <h2 class="section-editorial-title">The Four Non-Negotiable Pillars</h2>
+          <p class="section-editorial-subtitle">
+            Every operational rule at Cravely was designed to protect the flavor profile of the dish and the livelihood of the independent chef.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          
+          <div class="pillar-card">
+            <span class="pillar-num">01</span>
+            <h3 class="pillar-title">The 2.2-Mile Micro-Hub Radius</h3>
+            <p class="pillar-desc">
+              We never accept orders beyond a 2.2-mile radius from an indie kitchen. Hot food has an unbendable biological half-life. By limiting delivery distance, our electric cargo couriers reach any doorstep in under 12 minutes of ride time.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <span class="pillar-num">02</span>
+            <h3 class="pillar-title">Ceramic Induction Thermal Pods</h3>
+            <p class="pillar-desc">
+              Standard insulated bags trap moisture, turning crispy buns and pizza crusts into soggy rubber. Cravely’s patented induction pods actively heat at 155°F while venting humidity, maintaining the exact crispness and temperature of a dining room plate.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <span class="pillar-num">03</span>
+            <h3 class="pillar-title">Chef-First Fair Economics</h3>
+            <p class="pillar-desc">
+              The legacy aggregators take 30% to 40% from restaurants while hitting diners with surprise service fees. Cravely caps commissions at a transparent 15%, ensuring independent culinary masters earn the lion’s share of every meal they craft.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <span class="pillar-num">04</span>
+            <h3 class="pillar-title">Direct-Flight Courier Guild</h3>
+            <p class="pillar-desc">
+              Zero multi-order stacking. Zero intermediate stops. When courier Marco picks up your Margherita pizza from North Beach, he is routed directly to your door without detouring for someone else's groceries.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== MEET THE CHEF GUILD ==================== -->
+    <section class="about-chefs-section" id="chefs">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag-subtle">RESIDENT MASTERS</span>
+          <h2 class="section-editorial-title">Meet Our Neighborhood Culinary Partners</h2>
+          <p class="section-editorial-subtitle">
+            We don't partner with fast-food franchises. Cravely is an exclusive guild of San Francisco's most passionate independent kitchens.
+          </p>
+        </div>
+
+        <div class="chefs-grid">
+          
+          <!-- Chef 1 -->
+          <article class="chef-profile-card">
+            <div class="chef-card-img-wrap">
+              <img 
+                src="https://images.unsplash.com/photo-1583394293214-28ded15ee548?auto=format&fit=crop&w=500&q=80" 
+                alt="Chef Marcus Vance" 
+                class="chef-card-img" 
+              />
+            </div>
+            <div class="chef-card-body">
+              <span class="chef-kitchen-tag">SmashCraft Lab &bull; SoMa</span>
+              <h3 class="chef-name">Chef Marcus Vance</h3>
+              <span class="chef-specialty">Craft: 45-Day Dry-Aged Wagyu Burgers</span>
+              <p class="chef-quote">
+                "Cravely is the only platform that respects the sear on my burgers. They arrive sizzling, not lukewarm."
+              </p>
+            </div>
+          </article>
+
+          <!-- Chef 2 -->
+          <article class="chef-profile-card">
+            <div class="chef-card-img-wrap">
+              <img 
+                src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&w=500&q=80" 
+                alt="Chef Elena Rossi" 
+                class="chef-card-img" 
+              />
+            </div>
+            <div class="chef-card-body">
+              <span class="chef-kitchen-tag">Forno Antico &bull; North Beach</span>
+              <h3 class="chef-name">Chef Elena Rossi</h3>
+              <span class="chef-specialty">Craft: 72-Hour Fermented Neapolitan Pizza</span>
+              <p class="chef-quote">
+                "My dough takes three days to mature. Sending it in a soggy cardboard box was heartbreak. Cravely changed that forever."
+              </p>
+            </div>
+          </article>
+
+          <!-- Chef 3 -->
+          <article class="chef-profile-card">
+            <div class="chef-card-img-wrap">
+              <img 
+                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80" 
+                alt="Chef Kai Tanaka" 
+                class="chef-card-img" 
+              />
+            </div>
+            <div class="chef-card-body">
+              <span class="chef-kitchen-tag">Nalu Pacific &bull; Marina</span>
+              <h3 class="chef-name">Chef Kai Tanaka</h3>
+              <span class="chef-specialty">Craft: Wild Alaskan Salmon &amp; Forbidden Rice</span>
+              <p class="chef-quote">
+                "Their thermal pods keep the rice warm while the raw king salmon stays cold and pristine. That precision is unheard of."
+              </p>
+            </div>
+          </article>
+
+          <!-- Chef 4 -->
+          <article class="chef-profile-card">
+            <div class="chef-card-img-wrap">
+              <img 
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" 
+                alt="Chef Chloé Laurent" 
+                class="chef-card-img" 
+              />
+            </div>
+            <div class="chef-card-body">
+              <span class="chef-kitchen-tag">Pâtisserie Céleste &bull; Pac Heights</span>
+              <h3 class="chef-name">Chef Chloé Laurent</h3>
+              <span class="chef-specialty">Craft: Single-Origin Valrhona Fondants</span>
+              <p class="chef-quote">
+                "A molten chocolate core has a 12-minute window. Cravely’s 20-minute guarantee finally made fine dessert delivery possible."
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== THE 20-MINUTE DISPATCH TECHNOLOGY ==================== -->
+    <section class="about-tech-section" id="technology">
+      <div class="container">
+        
+        <div class="section-header text-center tech-header">
+          <span class="section-tag-subtle">LOGISTIC CHOREOGRAPHY</span>
+          <h2 class="section-editorial-title">How Cravely Delivers in 20 Minutes Flat</h2>
+          <p class="section-editorial-subtitle">
+            We eliminated car gridlock, parking delays, and aggregator batched trips. Here is our clockwork sequence.
+          </p>
+        </div>
+
+        <div class="tech-steps-grid">
+          
+          <div class="tech-card">
+            <div class="tech-step-badge">1</div>
+            <h3 class="tech-card-title">Synchronized Order Firing</h3>
+            <p class="tech-card-desc">
+              Your ticket prints at the kitchen the exact second a dedicated electric cargo bike courier is 3 minutes away from the pass. Food is plated just as the courier arrives.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-step-badge">2</div>
+            <h3 class="tech-card-title">Induction Thermal Sealing</h3>
+            <p class="tech-card-desc">
+              The dish is transferred immediately into Pod #14, an active induction container holding 155°F heat with calibrated micro-venting to prevent bun or crust condensation.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-step-badge">3</div>
+            <h3 class="tech-card-title">SF Bike-Lane Fast Track</h3>
+            <p class="tech-card-desc">
+              While cars are trapped on Market St or Van Ness, our specialized high-torque e-cargo bikes glide down dedicated bike lanes at 20 mph, bypassing traffic jams entirely.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-step-badge">4</div>
+            <h3 class="tech-card-title">Instant Temperature Guarantee</h3>
+            <p class="tech-card-desc">
+              If your dish takes longer than 25 minutes or arrives below optimum eating temperature, tap "Instant Refund" on your digital receipt for an immediate 100% wallet credit.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== DUAL CTA: DINERS & INDIE CHEFS ==================== -->
+    <section class="about-partner-section">
+      <div class="container">
+        <div class="partner-dual-grid">
+          
+          <!-- Box 1: Diners -->
+          <div class="partner-box">
+            <div>
+              <span class="hero-pill-badge">TASTE THE DIFFERENCE</span>
+              <h2 class="partner-box-title">Order hot chef dishes to your table tonight.</h2>
+              <p class="partner-box-desc">
+                Experience gourmet smash burgers, sourdough pizzas, and fresh poke delivered hot in 20 minutes with zero checkout junk fees. Use code <strong>CRAVE20</strong> for 20% off.
+              </p>
+            </div>
+            <div>
+              <a href="index.html#menu" class="btn btn-forest btn-block">Explore Today's Menu Highlights &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Box 2: Chefs -->
+          <div class="partner-box partner-box-accent">
+            <div>
+              <span class="panel-tag tag-dark">FOR INDEPENDENT RESTAURATEURS</span>
+              <h2 class="partner-box-title">Are you an indie kitchen in San Francisco?</h2>
+              <p class="partner-box-desc">
+                Stop losing 35% of your margins to aggregator apps. Partner with Cravely to access dedicated electric thermal couriers and keep 85%+ of your revenue.
+              </p>
+            </div>
+            <div>
+              <button type="button" class="btn btn-terracotta btn-block" onclick="alert('Thank you for your interest! Please contact chef-partners@cravely.sf to apply for the San Francisco Kitchen Guild.');">
+                Apply to the Cravely Kitchen Guild
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-grid">
+        
+        <div class="footer-col-brand">
+          <span class="footer-brand-title">Cravely<span class="brand-dot">.</span></span>
+          <p class="footer-desc">
+            An artisanal culinary delivery network connecting indie neighborhood kitchens to passionate food lovers.
+          </p>
+          <div class="social-pills">
+            <a href="index.html#hero" class="social-pill" aria-label="Instagram">Instagram</a>
+            <a href="index.html#hero" class="social-pill" aria-label="Twitter">Twitter/X</a>
+            <a href="index.html#hero" class="social-pill" aria-label="TikTok">TikTok</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-head">Pantry &amp; Menus</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#menu">Artisan Wagyu</a></li>
+            <li><a href="index.html#menu">Wood-Fired Pizza</a></li>
+            <li><a href="index.html#menu">Salmon Bowls</a></li>
+            <li><a href="index.html#menu">Belgian Sweets</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-head">Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">Our Story &amp; Mission</a></li>
+            <li><a href="index.html#how-it-works">Our Secret</a></li>
+            <li><a href="index.html#testimonials">Reviews</a></li>
+            <li><a href="about.html#chefs">Chef Partnerships</a></li>
+            <li><a href="about.html#technology">20-Min Route Tech</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-head">Kitchen Drops</h4>
+          <p class="newsletter-sub">Receive Friday secret chef tasting invitations &amp; 20% off drops.</p>
+          <form class="footer-form" onsubmit="event.preventDefault(); handleNewsletter();">
+            <input type="email" id="newsletterEmail" placeholder="Enter email..." required aria-label="Email address" />
+            <button type="submit" class="btn btn-terracotta btn-sm">Join</button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>&copy; 2026 Cravely Technologies. Crafted for exceptional taste.</span>
+        <div class="footer-legal-links">
+          <a href="index.html#faq">Privacy</a>
+          <span>•</span>
+          <a href="index.html#faq">Terms</a>
+          <span>•</span>
+          <a href="index.html#faq">Nutritional Transparency</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== FLOATING CART PILL (STICKY) ==================== -->
+  <aside class="floating-order-bar" id="floatingOrderBar" aria-label="Current order summary" role="button" tabindex="0">
+    <div class="floating-bar-inner">
+      <div class="floating-bar-left">
+        <div class="floating-cart-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="floating-badge-num" id="floatingCartCount">0</span>
+        </div>
+        <div class="floating-bar-text">
+          <span class="floating-order-title" id="floatingOrderTitle">Your Tray</span>
+          <span class="floating-order-sub" id="floatingOrderSub">Add dishes to proceed</span>
+        </div>
+      </div>
+      <div class="floating-bar-right">
+        <span class="floating-total-price" id="floatingTotalPrice">$0.00</span>
+        <button type="button" class="btn btn-forest btn-sm" id="btnFloatingCheckout">
+          <span>Checkout</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== CART & CHECKOUT SLIDE-OVER DRAWER ==================== -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle" aria-hidden="true">
+    
+    <!-- Drawer Header -->
+    <div class="cart-drawer-header">
+      <div class="drawer-header-left">
+        <h2 class="cart-drawer-title" id="cartDrawerTitle">Your Culinary Tray</h2>
+        <span class="cart-drawer-count" id="drawerCartCountBadge">0 items</span>
+      </div>
+      <button class="drawer-close-btn" id="btnCartDrawerClose" aria-label="Close cart drawer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Free Delivery Progress Bar -->
+    <div class="cart-free-delivery-banner" id="cartDeliveryBanner">
+      <div class="delivery-banner-text" id="deliveryBannerText">
+        <span>Add <strong>$25.00</strong> more for <strong>FREE 20-Min Delivery</strong></span>
+      </div>
+      <div class="delivery-progress-track">
+        <div class="delivery-progress-fill" id="deliveryProgressFill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- STEP 1: CART ITEMS VIEW -->
+    <div class="drawer-view active" id="cartStepItems">
+      <div class="cart-scroll-area">
+        
+        <!-- Empty Cart State -->
+        <div class="cart-empty-state" id="cartEmptyState">
+          <div class="empty-icon-wrap">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <h3 class="empty-title">Your tray is empty</h3>
+          <p class="empty-desc">Explore today's chef specials and add freshly prepared dishes to your tray.</p>
+          <a href="index.html#menu" class="btn btn-forest btn-sm" id="btnEmptyBrowse">
+            Browse Menu Ledger
+          </a>
+        </div>
+
+        <!-- Populated Cart Items List -->
+        <div class="cart-items-list" id="cartItemsList">
+          <!-- Dynamically populated by JS -->
+        </div>
+
+        <!-- Promo Code Section -->
+        <div class="cart-promo-section" id="cartPromoSection">
+          <div class="cart-promo-row">
+            <input type="text" id="cartPromoInput" placeholder="Promo code (e.g. CRAVE20)" aria-label="Promo code" />
+            <button type="button" class="btn btn-dark-subtle btn-sm" id="btnApplyCartPromo">Apply</button>
+          </div>
+          <div class="promo-quick-apply" id="promoQuickApplyWrap">
+            <button type="button" class="promo-chip" id="btnQuickApplyCRAVE20">
+              <span class="chip-sparkle">✦</span>
+              <span>Tap to apply <strong>CRAVE20</strong> (20% OFF)</span>
+            </button>
+          </div>
+          <div class="promo-applied-badge hidden" id="promoAppliedBadge">
+            <span class="promo-tag">✓ <strong>CRAVE20</strong> applied &bull; 20% OFF food</span>
+            <button type="button" class="promo-remove-btn" id="btnRemovePromo" title="Remove promo">&times;</button>
+          </div>
+        </div>
+
+        <!-- Courier Tip Selector -->
+        <div class="cart-tip-section" id="cartTipSection">
+          <span class="tip-label">Courier &amp; Kitchen Tip:</span>
+          <div class="tip-options" id="tipOptionsGroup">
+            <button type="button" class="tip-btn" data-tip="2.00">$2.00</button>
+            <button type="button" class="tip-btn active" data-tip="3.00">$3.00</button>
+            <button type="button" class="tip-btn" data-tip="5.00">$5.00</button>
+            <button type="button" class="tip-btn" data-tip="0.00">None</button>
+          </div>
+        </div>
+
+        <!-- Ledger Financial Breakdown -->
+        <div class="cart-summary-table" id="cartSummaryTable">
+          <div class="summary-line">
+            <span>Items Subtotal</span>
+            <span id="summarySubtotal">$0.00</span>
+          </div>
+          <div class="summary-line discount-line hidden" id="summaryDiscountRow">
+            <span>Promo Discount (20%)</span>
+            <span id="summaryDiscount">-$0.00</span>
+          </div>
+          <div class="summary-line">
+            <span>20-Min Express Delivery</span>
+            <span id="summaryDelivery">$2.50</span>
+          </div>
+          <div class="summary-line">
+            <span>Courier Thermal Tip</span>
+            <span id="summaryTip">$3.00</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-line total-line">
+            <span>Total Estimated</span>
+            <span class="summary-total-price" id="summaryTotal">$0.00</span>
+          </div>
+        </div>
+
+        <!-- Guarantee Note -->
+        <div class="cart-guarantee-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Guaranteed 20-min drop &bull; Active thermal pods &bull; Zero surprise fees</span>
+        </div>
+
+      </div>
+
+      <!-- Drawer Footer CTA -->
+      <div class="cart-drawer-footer" id="cartDrawerFooter">
+        <button type="button" class="btn btn-forest btn-block btn-lg" id="btnProceedToCheckout">
+          <span>Proceed to Checkout</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: CHECKOUT & ADDRESS VIEW -->
+    <div class="drawer-view hidden" id="cartStepCheckout">
+      <div class="cart-scroll-area">
+        <button type="button" class="btn-back-link" id="btnBackToCart">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          <span>Back to Order Tray</span>
+        </button>
+
+        <h3 class="checkout-section-title">Delivery Coordinates</h3>
+        
+        <div class="checkout-form-group">
+          <label for="checkoutAddress">Street Address / Drop Point</label>
+          <div class="checkout-input-with-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <input type="text" id="checkoutAddress" value="450 Mission St, San Francisco, CA" required />
+          </div>
+        </div>
+
+        <div class="checkout-form-row">
+          <div class="checkout-form-group">
+            <label for="checkoutSuite">Apt, Suite, Buzzer</label>
+            <input type="text" id="checkoutSuite" placeholder="Apt 4B / Callbox #12" />
+          </div>
+          <div class="checkout-form-group">
+            <label for="checkoutPhone">Mobile Phone</label>
+            <input type="tel" id="checkoutPhone" value="(415) 890-2411" required />
+          </div>
+        </div>
+
+        <div class="checkout-form-group">
+          <label for="checkoutNotes">Special Drop Instructions</label>
+          <input type="text" id="checkoutNotes" placeholder="e.g. Leave on doorstep table, do not knock." />
+        </div>
+
+        <!-- Thermal Pod Route Assurance -->
+        <div class="thermal-route-box">
+          <div class="thermal-badge">
+            <span class="thermal-pulse"></span>
+            <span>HEATED POD #14 RESERVED</span>
+          </div>
+          <p class="thermal-desc">
+            Your dishes are sealed at 155°F in insulated active induction pods. 20-minute countdown starts the moment chef stamps receipt.
+          </p>
+        </div>
+
+        <h3 class="checkout-section-title">Payment Method</h3>
+
+        <div class="payment-tabs">
+          <label class="payment-tab active">
+            <input type="radio" name="paymentMethod" value="card" checked />
+            <span class="payment-tab-content">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              <span>Credit Card</span>
+            </span>
+          </label>
+          <label class="payment-tab">
+            <input type="radio" name="paymentMethod" value="applepay" />
+            <span class="payment-tab-content">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.06 1.71-.93 2.73 1 .08 2.01-.54 2.55-1.23"/></svg>
+              <span>Apple Pay</span>
+            </span>
+          </label>
+        </div>
+
+        <div class="mock-card-fields" id="cardFieldsWrap">
+          <div class="checkout-form-group">
+            <label for="cardNumberInput">Card Number</label>
+            <div class="mock-card-input">
+              <input type="text" id="cardNumberInput" placeholder="4242 •••• •••• 4242" maxlength="19" value="4242 8890 2314 9012" />
+              <svg width="24" height="16" viewBox="0 0 36 24" fill="none"><rect width="36" height="24" rx="4" fill="#0E4334"/><circle cx="14" cy="12" r="7" fill="#EB001B" fill-opacity="0.85"/><circle cx="22" cy="12" r="7" fill="#F79E1B" fill-opacity="0.85"/></svg>
+            </div>
+          </div>
+          <div class="checkout-form-row">
+            <div class="checkout-form-group">
+              <label for="cardExpiryInput">Expiry</label>
+              <input type="text" id="cardExpiryInput" placeholder="MM/YY" maxlength="5" value="08/28" />
+            </div>
+            <div class="checkout-form-group">
+              <label for="cardCvcInput">CVC / CVI</label>
+              <input type="text" id="cardCvcInput" placeholder="123" maxlength="4" value="892" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkout Total Quick Line -->
+        <div class="checkout-bill-line">
+          <span>Amount to Pay:</span>
+          <strong id="checkoutFinalAmount">$0.00</strong>
+        </div>
+
+      </div>
+
+      <div class="cart-drawer-footer">
+        <button type="button" class="btn btn-terracotta btn-block btn-lg" id="btnPlaceOrder">
+          <span id="placeOrderText">Place 20-Min Order &amp; Track</span>
+          <div class="spinner-inline hidden" id="orderSpinner"></div>
+        </button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ==================== INTERACTIVE TOAST ==================== -->
+  <div class="toast-notification" id="toastNotification" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="toast-content">
+      <span class="toast-title" id="toastTitle">Notification</span>
+      <span class="toast-message" id="toastMessage">Action completed successfully.</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
+
