@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#121619" />
+  <meta name="description" content="OAU Cadet Training — Advanced 3D WebGL Military Marksmanship Simulator. Experience physical bullet ballistics, gravity drop, crosswind drift, and telescopic sniper optics directly in your browser." />
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <link rel="apple-touch-icon" href="assets/logo.jpg" />
+
+  <!-- Open Graph / Facebook / WhatsApp Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="OAU Cadet Training — 3D Tactical Marksmanship Simulator" />
+  <meta property="og:description" content="Military Marksmanship Qualification. Real 3D ballistics, bullet drop, wind drift, and DL-50 telescopic sniper optics. Play now in your browser!" />
+  <meta property="og:image" content="assets/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="OAU Cadet Training" />
+
+  <!-- Twitter / X Card Preview -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="OAU Cadet Training — 3D Tactical Marksmanship Simulator" />
+  <meta name="twitter:description" content="Military Marksmanship Qualification. Real 3D ballistics, bullet drop, wind drift, and DL-50 telescopic sniper optics. Play now in your browser!" />
+  <meta name="twitter:image" content="assets/og-image.jpg" />
+
+  <title>OAU Cadet Training — 3D Tactical Marksmanship Simulator</title>
+
+  <!-- Google Fonts: Orbitron (Headings/HUD) & JetBrains Mono (Ballistics/Numbers) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Three.js ESM CDN Import Map -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- 3D WebGL Canvas Layer -->
+  <canvas id="threeCanvas"></canvas>
+
+  <!-- Entry Point -->
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
