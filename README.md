@@ -7,7 +7,7 @@ Welcome to our combined project workspace! This repository contains a collection
 ```text
 gdg-web/
 ├── 001-prompt-engineering/    # Cravely: Chef-crafted gourmet food delivery web app & landing page (HTML5, CSS3, JS)
-└── [future_projects]/         # Subsequent GDG web projects & experiments
+└── gdg-game   # the web browser game folder
 ```
 
 ---
